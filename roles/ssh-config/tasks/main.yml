@@ -1,0 +1,18 @@
+---
+- name: Get VM port from lima
+  shell: limactl list bonsai.so | grep bonsai.so | awk '{print $3}' | sed 's/.*://'
+  register: vm_port
+  delegate_to: localhost
+  changed_when: false
+
+- name: Create temporary SSH config
+  template:
+    src: ssh_config.j2
+    dest: "{{ ansible_env.HOME }}/.ssh/config.tmp"
+  delegate_to: localhost
+  when: vm_port.stdout is defined and vm_port.stdout != ""
+
+- name: Move temporary SSH config into place
+  command: mv "{{ ansible_env.HOME }}/.ssh/config.tmp" "{{ ansible_env.HOME }}/.ssh/config"
+  delegate_to: localhost
+  when: vm_port.stdout is defined and vm_port.stdout != "" 

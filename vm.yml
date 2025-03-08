@@ -1,0 +1,8 @@
+---
+- name: "VM Management Tasks"
+  hosts: localhost
+  connection: local
+  gather_facts: yes
+
+  roles:
+    - { role: ssh-config, tags: [ssh-config] } 

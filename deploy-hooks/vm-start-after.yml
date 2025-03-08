@@ -1,0 +1,6 @@
+---
+- name: Update SSH configuration
+  command: ./scripts/update-ssh-config.sh
+  delegate_to: localhost
+  args:
+    chdir: "{{ project_local_path }}" 
