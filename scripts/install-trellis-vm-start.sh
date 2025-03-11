@@ -37,6 +37,7 @@ echo "Installing Trellis VM Start files to: $TARGET_DIR"
 mkdir -p "$TARGET_DIR/deploy-hooks"
 mkdir -p "$TARGET_DIR/roles/ssh-config/tasks"
 mkdir -p "$TARGET_DIR/roles/ssh-config/templates"
+mkdir -p "$TARGET_DIR/scripts"
 
 # Copy deploy-hooks files
 echo "Copying deploy-hooks files..."
@@ -46,6 +47,13 @@ cp "$SOURCE_DIR/deploy-hooks/vm-start-after.yml" "$TARGET_DIR/deploy-hooks/"
 echo "Copying roles files..."
 cp "$SOURCE_DIR/roles/ssh-config/tasks/main.yml" "$TARGET_DIR/roles/ssh-config/tasks/"
 cp "$SOURCE_DIR/roles/ssh-config/templates/ssh_config.j2" "$TARGET_DIR/roles/ssh-config/templates/"
+
+# Copy utility scripts
+echo "Copying utility scripts..."
+cp "$SOURCE_DIR/scripts/update-ssh-config.sh" "$TARGET_DIR/scripts/"
+cp "$SOURCE_DIR/scripts/vm-start.sh" "$TARGET_DIR/scripts/"
+chmod +x "$TARGET_DIR/scripts/update-ssh-config.sh"
+chmod +x "$TARGET_DIR/scripts/vm-start.sh"
 
 # Copy vm.yml
 echo "Copying vm.yml..."
